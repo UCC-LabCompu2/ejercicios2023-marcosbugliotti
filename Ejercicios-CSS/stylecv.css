@@ -1,0 +1,25 @@
+
+div{
+    border: 2px solid #131d88;
+    margin: 1% 10px;
+    padding: 10px;
+    background-color: rgb(50, 101, 129);
+    border-radius: 20px;
+    box-shadow: 2px 6px #016056;
+}
+#usuario{
+    float: left;
+    width: 10%;
+    border-radius: 50%;
+}
+body{
+    text-align: center;
+    font-family:  'Rubik Pixels', cursive;
+    background: linear-gradient(to right, #1123ea, #afaac2);
+}
+h1,h2,h3 {
+    text-shadow: 1px 2px #12937b;
+}
+.titulopri{
+    font-weight: bold;
+}
