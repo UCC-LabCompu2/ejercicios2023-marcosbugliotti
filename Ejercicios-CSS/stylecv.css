@@ -13,6 +13,7 @@ div{
     border-radius: 50%;
 }
 body{
+    column-count: 2;
     text-align: center;
     font-family:  'Rubik Pixels', cursive;
     background: linear-gradient(to right, #1123ea, #afaac2);

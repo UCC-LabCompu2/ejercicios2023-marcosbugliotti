@@ -8,6 +8,9 @@
 
  conver = (id,valor)=> {
      let met, pul,pie, yar;
+     if (valor.includes(",")){
+         valor=valor.replace(",",".");
+     }
     if (isNaN(valor)){
         alert("El valor es incorrecto");
         met ="";
@@ -26,10 +29,10 @@
     }else if (id==="yardas"){
 
     }
-     document.Lasun.unid_metro.value = met;
-     document.Lasun.unid_pulgada.value =pul;
-     document.Lasun.unid_pie.value =pie;
-     document.Lasun.unid_yarda.value= yar;
+     document.Lasun.unid_metro.value = Math.round(met*100)/100;
+     document.Lasun.unid_pulgada.value =Math.round(pul*100)/100;
+     document.Lasun.unid_pie.value = Number(pie).toFixed(2);
+     document.Lasun.unid_yarda.value= Number(yar).toFixed(2);
 }
 /**
  * Permite convertir entre grados y radianes
@@ -76,5 +79,66 @@ let sumar=()=>{
     sum1 = Number(document.opeMat.sum_num1.value);
     sum2=Number(document.opeMat.sum_num2.value);
     res = sum1  + sum2;
-    document.opeMat.sum_total.value =res;
+    document.getElementById("totalS").innerHTML =res;
+
+}
+let generarUrl = ()=> {
+    const dist = document.getElementById("distancia").value;
+    const uni = document.getElementsByName("unidades")[0].value;
+    const urlcompl=`segundaWeb.html#${dist}#${uni}`;
+    window.open((urlcompl));
+}
+let cargarValor = () =>{
+    let urlCompleta = window.location.href;
+    console.log(urlCompleta);
+    urlCompleta=urlCompleta.split("#");
+    const distancia =urlCompleta[1];
+    const unidad=urlCompleta[2];
+    document.getElementById("dist").value=`${distancia} ${unidad}`
+}
+
+let guardar = () => {
+    const dist = document.getElementById("distancia").value;
+    const uni = document.getElementsByName("unidades")[0].value;
+    localStorage.setItem("distanciaLS", dist);
+    localStorage.setItem("unidadesLS", uni);
+    window.open("web2.html");
+}
+let cargarLS = () => {
+    const distancia = localStorage.getItem("distanciaLS");
+    const unidad = localStorage.getItem("unidadesLS");
+    document.getElementById("dist").value = `${distancia} ${unidad}`;
+}
+let dibujarCirCua =()=> {
+  const canvas =document.getElementById("myCanvas");
+  const ctx =canvas.getContext("2d");
+    let xMax=canvas.width;
+    let yMax = canvas.height;
+    ctx.fillStyle="#56";
+    let margen=20;
+    ctx.fillRect(0+margen, yMax-50-margen, 60, 50);
+
+  ctx.arc(xMax/2, yMax/2, 200, 0, 2*Math.PI);
+  ctx.stroke();
+  ctx.fill();
+
+}
+let limpiarCanvas =()=>{
+    let canvas = document.getElementById("myCanvas");
+    canvas.width= canvas.width;
+}
+var bandera;
+let dibujar = ()=> {
+    let canvas = document.getElementById("myCanvas");
+    let ctx = canvas.getContext("2d");
+    let posX = event.clientX;
+    let posY = event.clientY;
+    console.log(posX, posY);
+
+    canvas.onmousedown= function (){bandera=true};
+    canvas.onmouseup=function (){bandera=false};
+    if (bandera){
+        ctx.fillRect(posX, posY, 5,5);
+        ctx.fill();
+    }
 }
