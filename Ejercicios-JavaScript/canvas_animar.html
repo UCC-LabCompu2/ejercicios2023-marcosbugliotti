@@ -8,22 +8,11 @@
     <script type="text/javascript" src="misFunciones.js"></script>
 </head>
 
-<body>
-<h1>Canvas 3</h1>
+<body onload="comenzaranimacion()">
+<h1>Canvas 4</h1>
 <p>Ejercicio: Dibujar  la imagen 'auto.png' en el canvas desde la posición pasada por parámetro. La función debe llamarse al presionar el boton.</p>
 
 <div class="centrado div-conver">
-    <form>
-        <p>
-            <label for="posicionX"> X</label> = <input id="posicionX" type="text" name="inp_x">
-        </p>
-        <p>
-            <label for="posicionY"> Y</label> = <input id="posicionY" type="text" name="inp_y">
-        </p>
-        <button type="button" onclick="dibujarimagen(inp_x.value, inp_y.value)">
-            Dibujar!
-        </button>
-    </form>
 </div>
 
 <canvas id="myCanvas" class="ejer" width="1000px" height="800px">

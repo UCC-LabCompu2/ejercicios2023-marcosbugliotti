@@ -142,3 +142,113 @@ let dibujar = ()=> {
         ctx.fill();
     }
 }
+let dibujarCuadriculado = () => {
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const anchomax = canvas.width;
+    const alturamax = canvas.height;
+    const paso = 20;
+    let eyeX;
+    eyeX=-25;
+    let eyeY;
+    eyeY=-15
+    //Lineas Verticales
+    for (i=paso;i<=anchomax;) {
+        ctx.beginPath();
+        ctx.moveTo(i, 0);
+        ctx.lineTo(i, alturamax);
+        ctx.strokeStyle = "#c754ad";
+        ctx.stroke();
+        ctx.font="10px Arial";
+        ctx.fillStyle = "#9b8d8d";
+        eyeX++;
+        ctx.fillText(eyeX,i,alturamax/2);
+        ctx.closePath();
+        i+=paso;
+    }
+    //Lineas horisontales
+    for (i=paso;i<=alturamax;i=i+paso) {
+        ctx.beginPath();
+        ctx.moveTo(0, i);
+        ctx.lineTo(anchomax, i);
+        ctx.strokeStyle = "#c754ad";
+        ctx.stroke();
+        ctx.font="10px Arial";
+        ctx.fillStyle = "#9b8d8d";
+        eyeY++;
+        ctx.fillText(eyeY,anchomax/2, i);
+        ctx.closePath();
+    }
+    //eje x
+    ctx.beginPath();
+    ctx.moveTo(0, alturamax/2);
+    ctx.lineTo(anchomax, alturamax/2);
+    ctx.strokeStyle = "#8c070b";
+    ctx.stroke();
+    ctx.closePath();
+    //eje y
+    ctx.beginPath();
+    ctx.moveTo(anchomax/2, 0);
+    ctx.lineTo(anchomax/2, alturamax);
+    ctx.strokeStyle = "#8c070b";
+    ctx.stroke();
+    ctx.closePath();
+}
+
+let dibujarimagen =(posX, posY)=>{
+    const canvas =document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const anchomax = canvas.width;
+    const alturamax = canvas.height;
+    canvas.width=canvas.width;
+    console.log(posX,posY);
+    let img = new Image();
+    img.src = "images/auto.png";
+    if (posX<0 ||posY<0 || posX>= anchomax ||posY>=alturamax){
+        opendialog();
+    }else {
+    img.onload = function () {
+        ctx.drawImage(img, posX, posY);
+    }
+    }
+}
+let cerrardialog =()=>{
+    const dialog = document.getElementById("myDialog")
+    dialog.close();
+}
+let opendialog =()=>{
+    const dialog = document.getElementById("myDialog")
+    dialog.showModal();
+}
+var x=0;
+var dx = 2;
+let animarauto =()=> {
+    const canvas =document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+
+
+    let img = new Image();
+    img.src = "images/auto.png";
+
+    img.onload = function () {
+        canvas.width=canvas.width;
+
+        ctx.drawImage(img, x, 100);
+    }
+    x+=dx;
+    if (x>canvas.width){
+        x=-150;
+    }
+}
+var intervalid;
+let detenerAuto = () => {
+    console.log("Se detuvo el auto")
+    clearInterval(intervalId); // Detener la animación
+}
+let comenzaranimacion =()=>{
+    console.log ("Se llamo a comenzar animacion");
+    intervalid= setInterval(animarauto, 20);
+    setTimeout(detenerAuto, 6000);
+}
